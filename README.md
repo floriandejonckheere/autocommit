@@ -20,7 +20,7 @@ $ npm install -g autocommit
 $ autocommit COMMAND
 running command...
 $ autocommit (--version)
-autocommit/0.0.0 darwin-arm64 node-v23.11.0
+autocommit/0.0.1 darwin-arm64 node-v23.11.0
 $ autocommit --help [COMMAND]
 USAGE
   $ autocommit COMMAND
@@ -65,7 +65,7 @@ EXAMPLES
   hello friend from oclif! (./src/commands/hello/index.ts)
 ```
 
-_See code: [src/commands/hello/index.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.0/src/commands/hello/index.ts)_
+_See code: [src/commands/hello/index.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/hello/index.ts)_
 
 ## `autocommit hello world`
 
@@ -83,7 +83,7 @@ EXAMPLES
   hello world! (./src/commands/hello/world.ts)
 ```
 
-_See code: [src/commands/hello/world.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.0/src/commands/hello/world.ts)_
+_See code: [src/commands/hello/world.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/hello/world.ts)_
 
 ## `autocommit help [COMMAND]`
 
