@@ -7,7 +7,14 @@ Leverage the power of LLMs to automatically generate commit messages based on th
 [![Version](https://img.shields.io/npm/v/@floriandejonckheere/autocommit.svg)](https://npmjs.org/package/@floriandejonckheere/autocommit)
 [![Downloads/week](https://img.shields.io/npm/dw/@floriandejonckheere/autocommit.svg)](https://npmjs.org/package/@floriandejonckheere/autocommit)
 
+<!-- toc -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
+
 # Usage
+
+<!-- usage -->
 
 Install the CLI globally using npm:
 
@@ -21,7 +28,9 @@ Configure the CLI by running:
 
     autocommit configure
 
-This will create a `~/.autocommit.json` file where you can set your OpenAI API key and other configurations.
+This will create a `~/.autocommit.mjs` file where you can set the default options for the CLI.
+
+Ensure the environment variable `GEMINI_API_KEY` is set with your Gemini API key, which can be obtained from the [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
 
 Generate a commit message based on the staged changes in your git repository by running:
 
@@ -29,8 +38,12 @@ Generate a commit message based on the staged changes in your git repository by 
 
 See the [Commands](#commands) section below for more details on available commands.
 
+<!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
+
 * [`autocommit generate`](#autocommit-generate)
 
 ## `autocommit generate`
@@ -65,6 +78,8 @@ EXAMPLES
 
   $ autocommit generate --style detailed --typed --scoped --technical --tense past --emoji
 ```
+
+<!-- commandsstop -->
 
 # License
 

@@ -1,8 +1,9 @@
 import {Flags} from '@oclif/core'
 
-import {BaseCommand} from "../base-command.js";
-import {gemini} from "../gemini.js";
-import {generatePrompt} from "../generate-prompt.js";
+import {BaseCommand} from '../base-command.js';
+import {gemini} from '../gemini.js';
+import {generatePrompt} from '../generate-prompt.js';
+import {Config} from '../types.js';
 
 export default class Generate extends BaseCommand<typeof Generate> {
   static description = 'Generate a commit message'
@@ -48,16 +49,19 @@ export default class Generate extends BaseCommand<typeof Generate> {
   async run(): Promise<void> {
     const {flags} = await this.parse(Generate)
 
-    const {style, typed, scoped, technical, tense, emoji} = flags as {
-      style: 'simple' | 'detailed',
-      typed: boolean,
-      scoped: boolean,
-      technical: boolean,
-      tense: 'present' | 'past',
-      emoji: boolean,
+    const config: Config = {
+      ...this.autocommitConfig,
+      // @ts-expect-error - enum value
+      style: flags.style,
+      typed: flags.typed,
+      scoped: flags.scoped,
+      technical: flags.technical,
+      // @ts-expect-error - enum value
+      tense: flags.tense,
+      emoji: flags.emoji,
     };
 
-    const prompt = generatePrompt({ style, typed, scoped, technical, tense, emoji })
+    const prompt = generatePrompt(config)
 
     const response = await gemini.models.generateContent({
       contents: [

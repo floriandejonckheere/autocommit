@@ -42,15 +42,11 @@ export const generatePrompt = (
     `.trim();
   }
 
-  if (flags.technical) {
-    prompt += `
+  prompt += flags.technical ? `
       The commit message is aimed at developers and can include technical jargon or references to specific files, functions, or algorithms.
-    `.trim();
-  } else {
-    prompt += `
+    `.trim() : `
       The commit message should be understandable by non-technical stakeholders.
     `.trim();
-  }
 
   if (flags.tense) {
     prompt += `

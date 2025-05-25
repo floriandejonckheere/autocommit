@@ -1,1 +1,1 @@
-{"root":["./src/generate.ts","./src/commands/hello/generate.ts","./src/commands/hello/world.ts"],"version":"5.8.3"}
+{"root":["./src/base-command.ts","./src/gemini.ts","./src/generate-prompt.ts","./src/index.ts","./src/commands/configure.ts","./src/commands/generate.ts"],"version":"5.8.3"}

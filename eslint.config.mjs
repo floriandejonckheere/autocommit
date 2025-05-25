@@ -9,6 +9,7 @@ const gitignorePath = path.resolve(path.dirname(fileURLToPath(import.meta.url)),
 export default [includeIgnoreFile(gitignorePath), ...oclif, prettier, {
   rules: {
     '@stylistic/lines-between-class-members': 'off',
+    'perfectionist/sort-classes': 'off',
     'perfectionist/sort-objects': 'off',
     'perfectionist/sort-object-types': 'off',
     'perfectionist/sort-union-types': 'off',
