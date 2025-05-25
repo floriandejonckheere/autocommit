@@ -1,11 +1,12 @@
-import {Args, Command, Flags} from '@oclif/core'
+import {Flags} from '@oclif/core'
 
-export default class Generate extends Command {
-  static args = {}
+import {BaseCommand} from "../../base-command.js";
+
+export default class Generate extends BaseCommand<typeof Generate> {
   static description = 'Generate a commit message'
   static examples = [
-    `<%= config.bin %> <%= command.id %>
-`,
+    '<%= config.bin %> <%= command.id %>',
+    '<%= config.bin %> <%= command.id %> --verbose',
   ]
   static flags = {
     verbose: Flags.boolean({description: 'Generate more verbose commit messages', required: false}),
@@ -15,5 +16,6 @@ export default class Generate extends Command {
     const {flags} = await this.parse(Generate)
 
     this.log(`Generating ${flags.verbose ? 'verbose ' : ''}commit messages!`)
+    this.log(`User configuration: ${JSON.stringify(this.userConfig, null, 2)}`)
   }
 }

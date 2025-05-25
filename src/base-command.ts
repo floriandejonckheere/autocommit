@@ -1,0 +1,59 @@
+import {Command, Flags, Interfaces} from '@oclif/core'
+import * as fs from "node:fs";
+// eslint-disable-next-line unicorn/import-style
+import * as path from "node:path";
+
+export type Flags<T extends typeof Command> = Interfaces.InferredFlags<T['flags'] & typeof BaseCommand['baseFlags']>
+export type Args<T extends typeof Command> = Interfaces.InferredArgs<T['args']>
+
+export abstract class BaseCommand<T extends typeof Command> extends Command {
+  // define flags that can be inherited by any command that extends BaseCommand
+  static baseFlags = {
+    'log-level': Flags.option({
+      default: 'info',
+      helpGroup: 'GLOBAL',
+      options: ['debug', 'warn', 'error', 'info', 'trace'] as const,
+      summary: 'Specify level for logging.',
+    })(),
+  }
+
+  protected args!: Args<T>
+  protected flags!: Flags<T>
+  protected userConfig!: Record<string, string>
+
+  protected async catch(err: Error & {exitCode?: number}): Promise<unknown> {
+    // add any custom logic to handle errors from the command
+    // or simply return the parent class error handling
+    return super.catch(err)
+  }
+
+  protected async finally(_: Error | undefined): Promise<unknown> {
+    // called after run and catch regardless of whether or not the command errored
+    return super.finally(_)
+  }
+
+  public async init(): Promise<void> {
+    await super.init()
+    const {args, flags} = await this.parse({
+      args: this.ctor.args,
+      baseFlags: (super.ctor as typeof BaseCommand).baseFlags,
+      flags: this.ctor.flags,
+      strict: this.ctor.strict,
+    })
+    this.flags = flags as Flags<T>
+    this.args = args as Args<T>
+
+
+    const configPath = path.join(this.config.configDir, "config.json");
+    if (!fs.existsSync(configPath)) {
+      throw new Error(`Configuration file not found at ${configPath}`);
+    }
+
+    this.userConfig = JSON.parse(
+      await fs.promises.readFile(
+        configPath,
+        'utf8'
+      )
+    );
+  }
+}
