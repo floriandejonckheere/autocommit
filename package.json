@@ -1,10 +1,10 @@
 {
-  "name": "autocommit",
+  "name": "@floriandejonckheere/autocommit",
   "description": "Leverage the power of LLMs to automatically generate commit messages based on the staged changes in your git repository.",
   "version": "0.0.1",
   "author": "Florian Dejonckheere",
   "bin": {
-    "autocommit": "./bin/run.js"
+    "autocommit": "bin/run.js"
   },
   "bugs": "https://github.com/floriandejonckheere/autocommit/issues",
   "dependencies": {
@@ -55,7 +55,10 @@
       "@oclif/plugin-plugins"
     ]
   },
-  "repository": "floriandejonckheere/autocommit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floriandejonckheere/autocommit.git"
+  },
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint",

@@ -5,8 +5,8 @@ A new CLI generated with oclif
 
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/autocommit.svg)](https://npmjs.org/package/autocommit)
-[![Downloads/week](https://img.shields.io/npm/dw/autocommit.svg)](https://npmjs.org/package/autocommit)
+[![Version](https://img.shields.io/npm/v/floriandejonckheere/autocommit.svg)](https://npmjs.org/package/floriandejonckheere/autocommit)
+[![Downloads/week](https://img.shields.io/npm/dw/floriandejonckheere/autocommit.svg)](https://npmjs.org/package/floriandejonckheere/autocommit)
 
 
 <!-- toc -->
@@ -16,11 +16,11 @@ A new CLI generated with oclif
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g autocommit
+$ npm install -g @floriandejonckheere/autocommit
 $ autocommit COMMAND
 running command...
 $ autocommit (--version)
-autocommit/0.0.1 darwin-arm64 node-v23.11.0
+@floriandejonckheere/autocommit/0.0.1 darwin-arm64 node-v23.8.0
 $ autocommit --help [COMMAND]
 USAGE
   $ autocommit COMMAND
@@ -30,18 +30,18 @@ USAGE
 # Commands
 <!-- commands -->
 * [`autocommit hello PERSON`](#autocommit-hello-person)
-* [`autocommit hello world`](#autocommit-hello-world)
+* [`autocommit hello:world`](#autocommit-helloworld)
 * [`autocommit help [COMMAND]`](#autocommit-help-command)
 * [`autocommit plugins`](#autocommit-plugins)
-* [`autocommit plugins add PLUGIN`](#autocommit-plugins-add-plugin)
+* [`autocommit plugins:add PLUGIN`](#autocommit-pluginsadd-plugin)
 * [`autocommit plugins:inspect PLUGIN...`](#autocommit-pluginsinspect-plugin)
-* [`autocommit plugins install PLUGIN`](#autocommit-plugins-install-plugin)
-* [`autocommit plugins link PATH`](#autocommit-plugins-link-path)
-* [`autocommit plugins remove [PLUGIN]`](#autocommit-plugins-remove-plugin)
-* [`autocommit plugins reset`](#autocommit-plugins-reset)
-* [`autocommit plugins uninstall [PLUGIN]`](#autocommit-plugins-uninstall-plugin)
-* [`autocommit plugins unlink [PLUGIN]`](#autocommit-plugins-unlink-plugin)
-* [`autocommit plugins update`](#autocommit-plugins-update)
+* [`autocommit plugins:install PLUGIN`](#autocommit-pluginsinstall-plugin)
+* [`autocommit plugins:link PATH`](#autocommit-pluginslink-path)
+* [`autocommit plugins:remove [PLUGIN]`](#autocommit-pluginsremove-plugin)
+* [`autocommit plugins:reset`](#autocommit-pluginsreset)
+* [`autocommit plugins:uninstall [PLUGIN]`](#autocommit-pluginsuninstall-plugin)
+* [`autocommit plugins:unlink [PLUGIN]`](#autocommit-pluginsunlink-plugin)
+* [`autocommit plugins:update`](#autocommit-pluginsupdate)
 
 ## `autocommit hello PERSON`
 
@@ -67,19 +67,19 @@ EXAMPLES
 
 _See code: [src/commands/hello/index.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/hello/index.ts)_
 
-## `autocommit hello world`
+## `autocommit hello:world`
 
 Say hello world
 
 ```
 USAGE
-  $ autocommit hello world
+  $ autocommit hello:world
 
 DESCRIPTION
   Say hello world
 
 EXAMPLES
-  $ autocommit hello world
+  $ autocommit hello:world
   hello world! (./src/commands/hello/world.ts)
 ```
 
@@ -128,13 +128,13 @@ EXAMPLES
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.38/src/commands/plugins/index.ts)_
 
-## `autocommit plugins add PLUGIN`
+## `autocommit plugins:add PLUGIN`
 
 Installs a plugin into autocommit.
 
 ```
 USAGE
-  $ autocommit plugins add PLUGIN... [--json] [-f] [-h] [-s | -v]
+  $ autocommit plugins:add PLUGIN... [--json] [-f] [-h] [-s | -v]
 
 ARGUMENTS
   PLUGIN...  Plugin to install.
@@ -159,20 +159,20 @@ DESCRIPTION
   Use the AUTOCOMMIT_NPM_REGISTRY environment variable to set the npm registry.
 
 ALIASES
-  $ autocommit plugins add
+  $ autocommit plugins:add
 
 EXAMPLES
   Install a plugin from npm registry.
 
-    $ autocommit plugins add myplugin
+    $ autocommit plugins:add myplugin
 
   Install a plugin from a github url.
 
-    $ autocommit plugins add https://github.com/someuser/someplugin
+    $ autocommit plugins:add https://github.com/someuser/someplugin
 
   Install a plugin from a github slug.
 
-    $ autocommit plugins add someuser/someplugin
+    $ autocommit plugins:add someuser/someplugin
 ```
 
 ## `autocommit plugins:inspect PLUGIN...`
@@ -181,7 +181,7 @@ Displays installation properties of a plugin.
 
 ```
 USAGE
-  $ autocommit plugins inspect PLUGIN...
+  $ autocommit plugins:inspect PLUGIN...
 
 ARGUMENTS
   PLUGIN...  [default: .] Plugin to inspect.
@@ -197,18 +197,18 @@ DESCRIPTION
   Displays installation properties of a plugin.
 
 EXAMPLES
-  $ autocommit plugins inspect myplugin
+  $ autocommit plugins:inspect myplugin
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.38/src/commands/plugins/inspect.ts)_
 
-## `autocommit plugins install PLUGIN`
+## `autocommit plugins:install PLUGIN`
 
 Installs a plugin into autocommit.
 
 ```
 USAGE
-  $ autocommit plugins install PLUGIN... [--json] [-f] [-h] [-s | -v]
+  $ autocommit plugins:install PLUGIN... [--json] [-f] [-h] [-s | -v]
 
 ARGUMENTS
   PLUGIN...  Plugin to install.
@@ -233,31 +233,31 @@ DESCRIPTION
   Use the AUTOCOMMIT_NPM_REGISTRY environment variable to set the npm registry.
 
 ALIASES
-  $ autocommit plugins add
+  $ autocommit plugins:add
 
 EXAMPLES
   Install a plugin from npm registry.
 
-    $ autocommit plugins install myplugin
+    $ autocommit plugins:install myplugin
 
   Install a plugin from a github url.
 
-    $ autocommit plugins install https://github.com/someuser/someplugin
+    $ autocommit plugins:install https://github.com/someuser/someplugin
 
   Install a plugin from a github slug.
 
-    $ autocommit plugins install someuser/someplugin
+    $ autocommit plugins:install someuser/someplugin
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.38/src/commands/plugins/install.ts)_
 
-## `autocommit plugins link PATH`
+## `autocommit plugins:link PATH`
 
 Links a plugin into the CLI for development.
 
 ```
 USAGE
-  $ autocommit plugins link PATH [-h] [--install] [-v]
+  $ autocommit plugins:link PATH [-h] [--install] [-v]
 
 ARGUMENTS
   PATH  [default: .] path to plugin
@@ -277,18 +277,18 @@ DESCRIPTION
 
 
 EXAMPLES
-  $ autocommit plugins link myplugin
+  $ autocommit plugins:link myplugin
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.38/src/commands/plugins/link.ts)_
 
-## `autocommit plugins remove [PLUGIN]`
+## `autocommit plugins:remove [PLUGIN]`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ autocommit plugins remove [PLUGIN...] [-h] [-v]
+  $ autocommit plugins:remove [PLUGIN...] [-h] [-v]
 
 ARGUMENTS
   PLUGIN...  plugin to uninstall
@@ -301,20 +301,20 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ autocommit plugins unlink
-  $ autocommit plugins remove
+  $ autocommit plugins:unlink
+  $ autocommit plugins:remove
 
 EXAMPLES
-  $ autocommit plugins remove myplugin
+  $ autocommit plugins:remove myplugin
 ```
 
-## `autocommit plugins reset`
+## `autocommit plugins:reset`
 
 Remove all user-installed and linked plugins.
 
 ```
 USAGE
-  $ autocommit plugins reset [--hard] [--reinstall]
+  $ autocommit plugins:reset [--hard] [--reinstall]
 
 FLAGS
   --hard       Delete node_modules and package manager related files in addition to uninstalling plugins.
@@ -323,13 +323,13 @@ FLAGS
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.38/src/commands/plugins/reset.ts)_
 
-## `autocommit plugins uninstall [PLUGIN]`
+## `autocommit plugins:uninstall [PLUGIN]`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ autocommit plugins uninstall [PLUGIN...] [-h] [-v]
+  $ autocommit plugins:uninstall [PLUGIN...] [-h] [-v]
 
 ARGUMENTS
   PLUGIN...  plugin to uninstall
@@ -342,22 +342,22 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ autocommit plugins unlink
-  $ autocommit plugins remove
+  $ autocommit plugins:unlink
+  $ autocommit plugins:remove
 
 EXAMPLES
-  $ autocommit plugins uninstall myplugin
+  $ autocommit plugins:uninstall myplugin
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.38/src/commands/plugins/uninstall.ts)_
 
-## `autocommit plugins unlink [PLUGIN]`
+## `autocommit plugins:unlink [PLUGIN]`
 
 Removes a plugin from the CLI.
 
 ```
 USAGE
-  $ autocommit plugins unlink [PLUGIN...] [-h] [-v]
+  $ autocommit plugins:unlink [PLUGIN...] [-h] [-v]
 
 ARGUMENTS
   PLUGIN...  plugin to uninstall
@@ -370,20 +370,20 @@ DESCRIPTION
   Removes a plugin from the CLI.
 
 ALIASES
-  $ autocommit plugins unlink
-  $ autocommit plugins remove
+  $ autocommit plugins:unlink
+  $ autocommit plugins:remove
 
 EXAMPLES
-  $ autocommit plugins unlink myplugin
+  $ autocommit plugins:unlink myplugin
 ```
 
-## `autocommit plugins update`
+## `autocommit plugins:update`
 
 Update installed plugins.
 
 ```
 USAGE
-  $ autocommit plugins update [-h] [-v]
+  $ autocommit plugins:update [-h] [-v]
 
 FLAGS
   -h, --help     Show CLI help.
