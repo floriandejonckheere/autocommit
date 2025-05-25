@@ -8,6 +8,7 @@
   },
   "bugs": "https://github.com/floriandejonckheere/autocommit/issues",
   "dependencies": {
+    "@google/genai": "^1.0.1",
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-plugins": "^5",
