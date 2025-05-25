@@ -1,8 +1,8 @@
 import {Flags} from '@oclif/core'
 
-import {BaseCommand} from "../../base-command.js";
-import {gemini} from "../../gemini.js";
-import {generatePrompt} from "../../generate-prompt.js";
+import {BaseCommand} from "../base-command.js";
+import {gemini} from "../gemini.js";
+import {generatePrompt} from "../generate-prompt.js";
 
 export default class Generate extends BaseCommand<typeof Generate> {
   static description = 'Generate a commit message'
