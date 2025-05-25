@@ -16,6 +16,5 @@ export default class Generate extends BaseCommand<typeof Generate> {
     const {flags} = await this.parse(Generate)
 
     this.log(`Generating ${flags.verbose ? 'verbose ' : ''}commit messages!`)
-    this.log(`User configuration: ${JSON.stringify(this.userConfig, null, 2)}`)
   }
 }

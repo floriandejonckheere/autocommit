@@ -1,7 +1,7 @@
+import 'dotenv/config'
 import {Command, Flags, Interfaces} from '@oclif/core'
-import * as fs from "node:fs";
-// eslint-disable-next-line unicorn/import-style
-import * as path from "node:path";
+
+import {GeminiConfig} from "./types.js";
 
 export type Flags<T extends typeof Command> = Interfaces.InferredFlags<T['flags'] & typeof BaseCommand['baseFlags']>
 export type Args<T extends typeof Command> = Interfaces.InferredArgs<T['args']>
@@ -19,7 +19,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
 
   protected args!: Args<T>
   protected flags!: Flags<T>
-  protected userConfig!: Record<string, string>
+  protected geminiConfig: GeminiConfig = {}
 
   protected async catch(err: Error & {exitCode?: number}): Promise<unknown> {
     // add any custom logic to handle errors from the command
@@ -43,17 +43,11 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
     this.flags = flags as Flags<T>
     this.args = args as Args<T>
 
+    // Load user configuration if needed
+    this.geminiConfig.apiKey = process.env.GEMINI_API_KEY
 
-    const configPath = path.join(this.config.configDir, "config.json");
-    if (!fs.existsSync(configPath)) {
-      throw new Error(`Configuration file not found at ${configPath}`);
+    if (!this.geminiConfig.apiKey) {
+      throw new Error('GEMINI_API_KEY is not set. Please set it in your environment or in .env.')
     }
-
-    this.userConfig = JSON.parse(
-      await fs.promises.readFile(
-        configPath,
-        'utf8'
-      )
-    );
   }
 }
