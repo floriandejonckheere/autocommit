@@ -1,8 +1,7 @@
 autocommit
 =================
 
-A new CLI generated with oclif
-
+Leverage the power of LLMs to automatically generate commit messages based on the staged changes in your git repository.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/floriandejonckheere/autocommit.svg)](https://npmjs.org/package/floriandejonckheere/autocommit)
