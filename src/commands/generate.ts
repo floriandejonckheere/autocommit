@@ -65,12 +65,14 @@ export default class Generate extends BaseCommand<typeof Generate> {
 
     const response = await gemini.models.generateContent({
       contents: [
-        prompt,
       ],
       model: "gemini-2.0-flash-lite",
       config: {
-        maxOutputTokens: 500,
+        systemInstruction: prompt,
+        maxOutputTokens: 100,
         temperature: 0.1,
+        topK: 1,
+        topP: 0.95,
       },
     });
     this.log(response.text);
