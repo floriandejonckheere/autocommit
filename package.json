@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "author": "Florian Dejonckheere",
   "bin": {
-    "autocommit": "bin/run.js"
+    "autocommit": "bin/run.js",
+    "git-autocommit": "bin/git-autocommit.sh"
   },
   "bugs": "https://github.com/floriandejonckheere/autocommit/issues",
   "dependencies": {
