@@ -18,6 +18,11 @@ export default class Generate extends BaseCommand<typeof Generate> {
       description: 'Use the current HEAD as the base for the commit message',
       required: false,
     }),
+    temperature: Flags.string({
+      default: '0.1',
+      description: 'Set the temperature for the commit message generation (0.0 to 1.0)',
+      required: false,
+    }),
 
     style: Flags.string({
       // default: 'simple',
@@ -119,7 +124,7 @@ export default class Generate extends BaseCommand<typeof Generate> {
       config: {
         systemInstruction: prompt,
         maxOutputTokens: 100,
-        temperature: 0.1,
+        temperature: Number.parseFloat(flags.temperature),
         topK: 1,
         topP: 0.95,
       },
