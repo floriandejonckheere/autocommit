@@ -21,7 +21,7 @@ export const generatePrompt = (
         The message should be structured in a way that is easy to read and understand.
         The commit message should be formatted as follows:
 
-        1. A short summary of the changes (50 characters or less).
+        1. A short summary of the changes (50 characters or less), ending with a period.
         2. A longer description of the changes added to the body of the commit message, if necessary (72 characters or less per line).
         3. Any relevant references, such as issue numbers or pull requests.
       `
@@ -34,7 +34,7 @@ export const generatePrompt = (
         It should summarize the changes made in the codebase in a single line.
         The commit message should be formatted as follows:
 
-        1. A short summary of the changes (50 characters or less).
+        1. A short summary of the changes (50 characters or less), no period at the end.
       `
       break;
     }
