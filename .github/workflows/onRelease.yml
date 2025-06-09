@@ -13,9 +13,9 @@ jobs:
         with:
           node-version: latest
       - run: corepack enable pnpm
-      - run: pnpm install
-      - run: pnpm run build
-      - run: pnpm run prepack
+      - run: corepack pnpm install
+      - run: corepack pnpm run build
+      - run: corepack pnpm run prepack
       - uses: JS-DevTools/npm-publish@19c28f1ef146469e409470805ea4279d47c3d35c
         with:
           token: ${{ secrets.NPM_TOKEN }}
