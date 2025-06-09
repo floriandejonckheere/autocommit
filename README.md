@@ -62,7 +62,7 @@ EXAMPLES
   $ autocommit configure
 ```
 
-_See code: [src/commands/configure.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/configure.ts)_
+_See code: [src/commands/configure.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.3/src/commands/configure.ts)_
 
 ## `autocommit generate`
 
@@ -96,7 +96,7 @@ EXAMPLES
   $ autocommit generate --style detailed --typed --scoped --technical --tense past --emoji
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.3/src/commands/generate.ts)_
 <!-- commandsstop -->
 
 # License
