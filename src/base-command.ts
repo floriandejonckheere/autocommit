@@ -69,6 +69,7 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       return;
     }
 
-    this.autocommitConfig = await import(configPath);
+    const defaultConfig = await import(configPath);
+    this.autocommitConfig = defaultConfig.default;
   }
 }

@@ -14,39 +14,39 @@ export default class Generate extends BaseCommand<typeof Generate> {
   ]
   static flags = {
     style: Flags.string({
-      default: 'simple',
+      // default: 'simple',
       description: 'Specify the style of the commit message',
       options: ['simple', 'detailed'],
       required: false,
     }),
     typed: Flags.boolean({
-      default: false,
+      // default: false,
       description: 'Prefix commit message with type (e.g., feat, fix, docs)',
       required: false,
     }),
     scoped: Flags.boolean({
-      default: false,
+      // default: false,
       description: 'Include scope in the commit message (e.g. core, auth, ui)',
       required: false,
     }),
     technical: Flags.boolean({
-      default: false,
+      // default: false,
       description: 'Include technical details in the commit message',
       required: false,
     }),
     tense: Flags.string({
-      default: 'present',
+      // default: 'present',
       description: 'Specify the tense of the commit message',
       options: ['present', 'past'],
       required: false,
     }),
     emoji: Flags.boolean({
-      default: false,
+      // default: false,
       description: 'Include emoji in the commit message',
       required: false,
     }),
     force: Flags.boolean({
-      default: false,
+      // default: false,
       description: 'Force the generation of a commit message even if the staged changes are too large',
       required: false,
     })
@@ -55,19 +55,25 @@ export default class Generate extends BaseCommand<typeof Generate> {
   async run(): Promise<void> {
     const {flags} = await this.parse(Generate)
 
+    const setFlags = Object.fromEntries(
+      Object.entries(flags).filter(([, value]) => value !== undefined && value !== null && value !== '')
+    );
+
     const config: Config = {
       ...this.autocommitConfig,
-      // @ts-expect-error - enum value
-      style: flags.style,
-      typed: flags.typed,
-      scoped: flags.scoped,
-      technical: flags.technical,
-      // @ts-expect-error - enum value
-      tense: flags.tense,
-      emoji: flags.emoji,
+      ...setFlags,
     };
 
+    if (flags['log-level'] === 'debug') {
+      this.log('Config options:', JSON.stringify(this.autocommitConfig, null, 2));
+      this.log('Config options:', JSON.stringify(config, null, 2));
+    }
+
     const prompt = generatePrompt(config)
+
+    if (flags['log-level'] === 'debug') {
+      this.log(`Prompt generated:\n${prompt}`);
+    }
 
     const changes = await simpleGit()
       .diff(['--cached', '--text', '--unified=0'])
