@@ -1,7 +1,4 @@
 export default {
-  // Specify the logging level: 'info', 'warn', 'error', 'debug'
-  logLevel: 'info',
-
   // Specify the style of the commit message: 'simple', 'detailed'
   style: 'simple',
 

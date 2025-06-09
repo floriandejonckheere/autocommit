@@ -30,6 +30,11 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       helpGroup: 'GLOBAL',
       summary: 'Run the command without making any API calls',
     }),
+    force: Flags.boolean({
+      default: false,
+      description: 'Force the generation of a commit message even if the staged changes are too large',
+      required: false,
+    }),
   }
 
   protected args!: Args<T>

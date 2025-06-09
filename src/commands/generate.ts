@@ -44,11 +44,6 @@ export default class Generate extends BaseCommand<typeof Generate> {
       // default: false,
       description: 'Include emoji in the commit message',
       required: false,
-    }),
-    force: Flags.boolean({
-      // default: false,
-      description: 'Force the generation of a commit message even if the staged changes are too large',
-      required: false,
     })
   }
 
