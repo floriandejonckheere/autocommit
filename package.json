@@ -1,7 +1,7 @@
 {
   "name": "@floriandejonckheere/autocommit",
   "description": "Leverage the power of LLMs to automatically generate commit messages based on the staged changes in your git repository.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Florian Dejonckheere",
   "bin": {
     "autocommit": "bin/run.js",
