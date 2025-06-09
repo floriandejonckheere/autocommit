@@ -66,12 +66,10 @@ export const generatePrompt = (
       It should avoid technical jargon and focus on the high-level changes made in the codebase.
     `.replaceAll(/\s{2,}/g, ' ');
 
-  if (flags.tense) {
-    prompt += `
-      The commit message should be in ${flags.tense} tense.
-      For example: "feat: add new feature" (present tense) or "fix: resolved bug" (past tense).
-    `.replaceAll(/\s{2,}/g, ' ');
-  }
+  prompt += `
+    All verbs in the commit message is written in the ${flags.tense} tense.
+    For example: "feat: add new feature" (present tense) or "fix: resolved bug" (past tense).
+  `.replaceAll(/\s{2,}/g, ' ');
 
   if (flags.emoji) {
     prompt += `
