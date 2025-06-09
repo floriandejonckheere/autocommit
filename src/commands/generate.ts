@@ -13,6 +13,12 @@ export default class Generate extends BaseCommand<typeof Generate> {
     '<%= config.bin %> <%= command.id %> --style detailed --typed --scoped --technical --tense past --emoji',
   ]
   static flags = {
+    head: Flags.boolean({
+      // default: false,
+      description: 'Use the current HEAD as the base for the commit message',
+      required: false,
+    }),
+
     style: Flags.string({
       // default: 'simple',
       description: 'Specify the style of the commit message',
@@ -60,19 +66,23 @@ export default class Generate extends BaseCommand<typeof Generate> {
     };
 
     if (flags['log-level'] === 'debug') {
-      this.log('Config options:', JSON.stringify(this.autocommitConfig, null, 2));
       this.log('Config options:', JSON.stringify(config, null, 2));
     }
 
     const prompt = generatePrompt(config)
 
     if (flags['log-level'] === 'debug') {
-      this.log(`Prompt generated:\n${prompt}`);
+      this.log(`Prompt generated:\n${prompt}\n\n`);
     }
 
     const changes = await simpleGit()
-      .diff(['--cached', '--text', '--unified=0'])
-      .then(diff => diff.trim())
+      .diff(['--text', '--unified=0', flags.head ? 'HEAD~..HEAD' : '--staged'])
+      .then(diff => diff.replaceAll(/\s{2,}/g, ' '))
+
+
+    if (flags['log-level'] === 'debug') {
+      this.log(`Context:\n${changes}`);
+    }
 
     if (!changes || changes.length === 0) {
       this.log('No staged changes found. Please stage your changes before generating a commit message.');
@@ -81,6 +91,8 @@ export default class Generate extends BaseCommand<typeof Generate> {
     }
 
     if (flags['dry-run']) {
+      this.log('Dry run mode enabled. No API calls are made.');
+
       return;
     }
 
