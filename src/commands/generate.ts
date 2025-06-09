@@ -1,4 +1,5 @@
 import {Flags} from '@oclif/core'
+import { simpleGit } from 'simple-git';
 
 import {BaseCommand} from '../base-command.js';
 import {gemini} from '../gemini.js';
@@ -44,6 +45,11 @@ export default class Generate extends BaseCommand<typeof Generate> {
       description: 'Include emoji in the commit message',
       required: false,
     }),
+    force: Flags.boolean({
+      default: false,
+      description: 'Force the generation of a commit message even if the staged changes are too large',
+      required: false,
+    })
   }
 
   async run(): Promise<void> {
@@ -63,9 +69,35 @@ export default class Generate extends BaseCommand<typeof Generate> {
 
     const prompt = generatePrompt(config)
 
-    const response = await gemini.models.generateContent({
+    const changes = await simpleGit()
+      .diff(['--cached', '--text', '--unified=0'])
+      .then(diff => diff.trim())
+
+    if (!changes || changes.length === 0) {
+      this.log('No staged changes found. Please stage your changes before generating a commit message.');
+
+      return;
+    }
+
+    // Check if the staged changes are too large
+    const countTokensResponse = await gemini.models.countTokens({
+      model: "gemini-2.0-flash-lite",
       contents: [
+        prompt,
+        changes
       ],
+    });
+
+    const tokens = countTokensResponse.totalTokens || 0;
+
+    if (!flags.force && tokens > 1000) {
+      this.log(`Staged changes are too large to process (${tokens} tokens). Please reduce the size of your staged changes, or use the --force flag to bypass this check.`);
+
+      return;
+    }
+
+    const response = await gemini.models.generateContent({
+      contents: changes,
       model: "gemini-2.0-flash-lite",
       config: {
         systemInstruction: prompt,
@@ -75,6 +107,11 @@ export default class Generate extends BaseCommand<typeof Generate> {
         topP: 0.95,
       },
     });
-    this.log(response.text);
+
+    if (response.text) {
+      this.log(response.text.trim());
+    } else {
+      this.log('No commit message could be generated. Please try again with different options or check your staged changes.');
+    }
   }
 }
