@@ -9,14 +9,21 @@ import {Config} from './types.js';
 export type Flags<T extends typeof Command> = Interfaces.InferredFlags<T['flags'] & typeof BaseCommand['baseFlags']>
 export type Args<T extends typeof Command> = Interfaces.InferredArgs<T['args']>
 
+export enum LogLevel {
+  debug = 'debug',
+  error = 'error',
+  info = 'info',
+  warn = 'warn',
+}
+
 export abstract class BaseCommand<T extends typeof Command> extends Command {
   // define flags that can be inherited by any command that extends BaseCommand
   static baseFlags = {
     'log-level': Flags.option({
-      default: 'info',
+      default: LogLevel.info,
       helpGroup: 'GLOBAL',
-      options: ['debug', 'warn', 'error', 'info', 'trace'] as const,
-      summary: 'Specify level for logging.',
+      options: Object.values(LogLevel),
+      summary: 'Specify level for logging',
     })(),
   }
 

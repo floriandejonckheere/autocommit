@@ -1,4 +1,5 @@
 export type Config = {
+  logLevel: 'debug' | 'error' | 'info' | 'warn';
   style: 'simple' | 'detailed';
   typed: boolean;
   scoped: boolean;
