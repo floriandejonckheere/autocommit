@@ -79,6 +79,10 @@ export default class Generate extends BaseCommand<typeof Generate> {
       return;
     }
 
+    if (flags['dry-run']) {
+      return;
+    }
+
     // Check if the staged changes are too large
     const countTokensResponse = await gemini.models.countTokens({
       model: "gemini-2.0-flash-lite",

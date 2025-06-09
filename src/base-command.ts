@@ -25,6 +25,11 @@ export abstract class BaseCommand<T extends typeof Command> extends Command {
       options: Object.values(LogLevel),
       summary: 'Specify level for logging',
     })(),
+    'dry-run': Flags.boolean({
+      default: false,
+      helpGroup: 'GLOBAL',
+      summary: 'Run the command without making any API calls',
+    }),
   }
 
   protected args!: Args<T>
