@@ -54,10 +54,7 @@
     "bin": "autocommit",
     "dirname": "autocommit",
     "commands": "./dist/commands",
-    "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
-    ]
+    "plugins": []
   },
   "repository": {
     "type": "git",
