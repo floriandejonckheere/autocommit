@@ -11,7 +11,7 @@ export const generatePrompt = (
   let prompt = `
     You are a helpful AI assistant that automatically generates commit messages based on the staged changes.
     The commit message should be concise, clear, and reflect the changes made in the codebase.
-  `.replaceAll(/\s{2,}/g, ' ');
+  `
 
   switch (flags.style) {
     case 'detailed': {
@@ -24,7 +24,7 @@ export const generatePrompt = (
         1. A short summary of the changes (50 characters or less).
         2. A longer description of the changes added to the body of the commit message, if necessary (72 characters or less per line).
         3. Any relevant references, such as issue numbers or pull requests.
-      `.replaceAll(/\s{2,}/g, ' ');
+      `
       break;
     }
 
@@ -35,50 +35,51 @@ export const generatePrompt = (
         The commit message should be formatted as follows:
 
         1. A short summary of the changes (50 characters or less).
-      `.replaceAll(/\s{2,}/g, ' ');
+      `
       break;
     }
   }
 
-  if (flags.typed) {
-    prompt += `
-      The commit message should be prefixed with a type.
-      The possible types are: feat, fix, docs, style, refactor, test, chore.
-      The type should be followed by a colon and a space.
+  prompt += flags.typed ? ` 
+    The commit message should be prefixed with a type.
+    The possible types are: feat, fix, docs, style, refactor, test, chore.
+    The type should be followed by a colon and a space.
 
-      For example: "feat: add new feature" or "fix: resolve bug".
-    `.replaceAll(/\s{2,}/g, ' ');
-  }
+    For example: "feat: add new feature" or "fix: resolve bug".
+  ` : `
+    The commit message should not be prefixed with a type.
+  `
 
-  if (flags.scoped) {
-    prompt += `
-      The commit message should include a scope, which is a noun describing the part of the codebase affected by the changes (e.g., core, auth, ui).
-      The scope should be enclosed in parentheses.
-      For example: "feat (core): add new feature" or "fix (auth): resolve bug".
-    `.replaceAll(/\s{2,}/g, ' ');
-  }
+  prompt += flags.scoped ? `
+    The commit message should include a scope, which is a noun describing the part of the codebase affected by the changes (e.g., core, auth, ui).
+    The scope should be enclosed in parentheses.
+    For example: "feat (core): add new feature" or "fix (auth): resolve bug".
+  ` : `
+    The commit message should not include a scope.
+  `
 
   prompt += flags.technical ? `
       The commit message is aimed at developers and can include technical jargon or references to specific files, functions, or algorithms.
       It should be clear and precise, providing enough context for other developers to understand the changes made.
-    `.replaceAll(/\s{2,}/g, ' ') : `
+    ` : `
       The commit message should be understandable by non-technical stakeholders.
       It should avoid technical jargon and focus on the high-level changes made in the codebase.
-    `.replaceAll(/\s{2,}/g, ' ');
+    `
 
   prompt += `
-    All verbs in the commit message is written in the ${flags.tense} tense.
+    All verbs in the commit message are written in the ${flags.tense} tense.
+    No exceptions.
     For example: "feat: add new feature" (present tense) or "fix: resolved bug" (past tense).
-  `.replaceAll(/\s{2,}/g, ' ');
+  `
 
   if (flags.emoji) {
     prompt += `
       The commit message should include an appropriate emoji.
       The emoji should be relevant to the changes made in the codebase.
       The emoji is placed at the beginning of the commit message.
-      For example: "✨ feat: add new feature" or "🐛 fix: resolve bug".
-    `.replaceAll(/\s{2,}/g, ' ');
+      For example: "✨ add new feature" or "🐛 resolve bug".
+    `
   }
 
-  return prompt;
+  return prompt.replaceAll(/\s{2,}/g, ' ');
 }
