@@ -10,11 +10,10 @@ Leverage the power of LLMs to automatically generate commit messages based on th
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [License](#license)
 <!-- tocstop -->
 
 # Usage
-
-<!-- usage -->
 
 Install the CLI globally using npm:
 
@@ -38,23 +37,41 @@ Generate a commit message based on the staged changes in your git repository by 
 
 See the [Commands](#commands) section below for more details on available commands.
 
-<!-- usagestop -->
-
 # Commands
 
 <!-- commands -->
-
+* [`autocommit configure`](#autocommit-configure)
 * [`autocommit generate`](#autocommit-generate)
+
+## `autocommit configure`
+
+Configure commit message generation options
+
+```
+USAGE
+  $ autocommit configure [--log-level debug|warn|error|info|trace]
+
+GLOBAL FLAGS
+  --log-level=<option>  [default: info] Specify level for logging.
+                        <options: debug|warn|error|info|trace>
+
+DESCRIPTION
+  Configure commit message generation options
+
+EXAMPLES
+  $ autocommit configure
+```
+
+_See code: [src/commands/configure.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/configure.ts)_
 
 ## `autocommit generate`
 
-Generate a commit message based on staged changes
-
-```
 Generate a commit message
 
+```
 USAGE
-  $ autocommit generate [--log-level debug|warn|error|info|trace] [--style simple|detailed] [--typed] [--scoped] [--technical] [--tense present|past] [--emoji]
+  $ autocommit generate [--log-level debug|warn|error|info|trace] [--style simple|detailed] [--typed]
+    [--scoped] [--technical] [--tense present|past] [--emoji]
 
 FLAGS
   --emoji           Include emoji in the commit message
@@ -79,6 +96,7 @@ EXAMPLES
   $ autocommit generate --style detailed --typed --scoped --technical --tense past --emoji
 ```
 
+_See code: [src/commands/generate.ts](https://github.com/floriandejonckheere/autocommit/blob/v0.0.1/src/commands/generate.ts)_
 <!-- commandsstop -->
 
 # License
